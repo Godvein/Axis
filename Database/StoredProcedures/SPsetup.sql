@@ -30,7 +30,8 @@ where UserId = @UserId
 end
 if @flag = 1
 begin
-select Username, FullName, RoleId from Users
+select u.UserId, u.Username, u.FullName, r.RoleName, u.IsActive from Users u
+left join Roles r on u.RoleId = r.RoleId
 end
 end
 

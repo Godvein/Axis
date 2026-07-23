@@ -10,12 +10,14 @@ namespace Axis.Controllers
     {
         private readonly IAdminDashboardService _adminDashboardService;
         private readonly IDepartmentService _departmentService;
-        public readonly IRoleService _roleService;
-        public AdminController(IAdminDashboardService adminDashboardService, IDepartmentService departmentService, IRoleService roleService)
+        private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
+        public AdminController(IAdminDashboardService adminDashboardService, IDepartmentService departmentService, IRoleService roleService, IUserService userService)
         {
             _adminDashboardService = adminDashboardService;
             _departmentService = departmentService;
             _roleService = roleService;
+            _userService = userService;
         }
         public IActionResult Dashboard()
         {
@@ -25,16 +27,25 @@ namespace Axis.Controllers
 
         public IActionResult Users()
         {
-            return View();
+            var users = _userService.GetUserList();
+            return View(users);
         }
-
+        #region create user controller
         public IActionResult CreateUser() {
             CreateUserViewModel createUserViewModel = new CreateUserViewModel();
             createUserViewModel.Roles = _roleService.GetRoles();
             createUserViewModel.Departments = _departmentService.GetDepartments();
             return View(createUserViewModel);
         }
-
-
+        [HttpPost]
+        public IActionResult CreateUser(CreateUserViewModel createUserViewModel) { 
+            if (createUserViewModel != null)
+            {
+               _userService.CreateUser(createUserViewModel);
+                return RedirectToAction("Users", "Admin");
+            }
+            return RedirectToAction("CreateUser", "Admin");
+        }
+        #endregion
     }
 }

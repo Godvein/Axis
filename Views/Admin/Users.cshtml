@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Axis.Models.ViewModels.UserListViewModel>
+
+@{
     ViewData["Title"] = "Manage Users";
 }
 
@@ -31,17 +33,12 @@
                 <div class="col-md-3">
                     <select class="form-select">
                         <option>All Roles</option>
-                        <option>Administrator</option>
-                        <option>Manager</option>
-                        <option>Employee</option>
                     </select>
                 </div>
 
                 <div class="col-md-3">
                     <select class="form-select">
                         <option>All Status</option>
-                        <option>Active</option>
-                        <option>Inactive</option>
                     </select>
                 </div>
 
@@ -65,39 +62,57 @@
 
                 <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>ankit</td>
-                        <td>Ankit Dware</td>
-                        <td>Administrator</td>
-                        <td>
-                            <span class="badge bg-success">
-                                Active
-                            </span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="#" class="btn btn-sm btn-info text-white">Details</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
+                    @if (Model.Any())
+                    {
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.UserId</td>
+                                <td>@user.Username</td>
+                                <td>@user.FullName</td>
+                                <td>@user.RoleName</td>
 
-                    <tr>
-                        <td>2</td>
-                        <td>john</td>
-                        <td>John Smith</td>
-                        <td>Employee</td>
-                        <td>
-                            <span class="badge bg-secondary">
-                                Inactive
-                            </span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="#" class="btn btn-sm btn-info text-white">Details</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
+                                <td>
+                                    @if (user.IsActive)
+                                    {
+                                        <span class="badge bg-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <a asp-action="EditUser"
+                                       asp-route-id="@user.UserId"
+                                       class="btn btn-sm btn-warning">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="UserDetails"
+                                       asp-route-id="@user.UserId"
+                                       class="btn btn-sm btn-info text-white">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="DeleteUser"
+                                       asp-route-id="@user.UserId"
+                                       class="btn btn-sm btn-danger">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center p-4">
+                                No users found.
+                            </td>
+                        </tr>
+                    }
 
                 </tbody>
 
@@ -108,4 +123,3 @@
     </div>
 
 </div>
-
