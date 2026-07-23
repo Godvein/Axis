@@ -116,3 +116,37 @@ set @RolesCount = (select count(RoleId) as RolesCount from Roles)
 set @DepartmentsCount = (select count(DepartmentId) as DepartmentsCount from Departments)
 end
 go
+
+-- Get Roles SP
+create proc usp_GetRoles 
+as
+begin
+
+set nocount on
+select * from Roles
+end
+go
+
+-- Get Departments SP
+create proc usp_GetDepartments
+as
+begin
+
+set nocount on
+select * from Departments
+end
+go
+
+-- Create User SP
+create proc usp_CreateUser
+@Username varchar(100),
+@PasswordHash varchar(255),
+@FullName varchar(100),
+@Email varchar(100),
+@RoleId int,
+@DepartmentId int
+as
+begin
+insert into Users (Username, PasswordHash, FullName, Email, RoleId, IsActive, DepartmentId)
+values (@Username, @PasswordHash, @FullName, @Email, @RoleId, '1', @DepartmentId);
+end

@@ -44,5 +44,10 @@ namespace Axis.Controllers
             return RedirectToAction("Login", "Authentication");
         }
         #endregion
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

@@ -16,6 +16,10 @@ namespace Axis
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IAdminDashboardRepository, AdminDashboardRepository>();
             builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
             // session registration
             builder.Services.AddDistributedMemoryCache();
