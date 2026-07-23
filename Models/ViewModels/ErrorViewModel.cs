@@ -1,4 +1,4 @@
-namespace Axis.Models
+namespace Axis.Models.ViewModels
 {
     public class ErrorViewModel
     {

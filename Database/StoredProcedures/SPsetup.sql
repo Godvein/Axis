@@ -100,3 +100,19 @@ begin
 select * from Tasks where TaskId = @TaskId
 end
 end
+go
+
+-- Admin Dashboard Info SP
+create proc usp_AdminDashboardInfo 
+@UsersCount int out,
+@TasksCount int out,
+@RolesCount int out,
+@DepartmentsCount int out
+as
+begin
+set @UsersCount = (select count(UserId) as UsersCount from Users)
+set @TasksCount = (select count(TaskId) as TasksCount from Tasks)
+set @RolesCount = (select count(RoleId) as RolesCount from Roles)
+set @DepartmentsCount = (select count(DepartmentId) as DepartmentsCount from Departments)
+end
+go

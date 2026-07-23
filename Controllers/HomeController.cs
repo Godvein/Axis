@@ -1,14 +1,20 @@
-using Axis.Models;
+using Axis.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Axis.Attributes;
 
 namespace Axis.Controllers
 {
+    [SessionAuthorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetInt32("RoleId") == 1)
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            return RedirectToAction("Dashboard", "User");
         }
 
         public IActionResult Privacy()

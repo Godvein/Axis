@@ -1,4 +1,5 @@
 ﻿using Axis.Models;
+using Axis.Models.ViewModels;
 using Axis.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,15 @@ namespace Axis.Controllers
             }
             return RedirectToAction("Login", "Authentication");
 
+        }
+        #endregion
+
+        #region Logout Controller
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Authentication");
         }
         #endregion
     }

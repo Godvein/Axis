@@ -4,6 +4,12 @@ create table Roles (
 	);
 go
 
+create table Departments (
+DepartmentId int identity primary key,
+DepartmentName varchar(255)
+)
+go
+
 create table Users (
 	UserId int identity primary key,
 	Username varchar(100),
@@ -11,9 +17,11 @@ create table Users (
 	FullName varchar (100),
 	Email varchar(100),
 	RoleId int,
+	DepartmentId int,
 	IsActive bit,
 	CreatedAt datetime default getdate(),
-	foreign key (RoleId) references Roles(RoleId)
+	foreign key (RoleId) references Roles(RoleId),
+	foreign key (DepartmentId) references Departments(DepartmentId)
 );
 go
 

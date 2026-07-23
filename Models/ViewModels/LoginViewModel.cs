@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Axis.Models
+namespace Axis.Models.ViewModels
 {
     public class LoginViewModel
     {

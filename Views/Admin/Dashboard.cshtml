@@ -1,0 +1,140 @@
+﻿@model Axis.Models.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h2>Dashboard</h2>
+        <p class="text-muted">
+            Welcome back, <strong>@Context.Session.GetString("Username")</strong>
+        </p>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Users</h6>
+                    <h2>@Model.UsersCount</h2>
+                    <small>Total Registered</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Tasks</h6>
+                    <h2>@Model.TasksCount</h2>
+                    <small>Total Tasks</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Roles</h6>
+                    <h2>@Model.RolesCount</h2>
+                    <small>System Roles</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Departments</h6>
+                    <h2>@Model.DepartmentsCount</h2>
+                    <small>Available</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-5">
+        <h4>Quick Actions</h4>
+
+        <div class="d-flex flex-wrap gap-2 mt-3">
+
+            <a asp-controller="User"
+               asp-action="Index"
+               class="btn btn-primary">
+                Manage Users
+            </a>
+
+            <a asp-controller="Task"
+               asp-action="Index"
+               class="btn btn-success">
+                Manage Tasks
+            </a>
+
+            <a asp-controller="Role"
+               asp-action="Index"
+               class="btn btn-warning">
+                Manage Roles
+            </a>
+
+            <a asp-controller="Report"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Reports
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card shadow-sm mt-5">
+
+        <div class="card-header">
+            Recent Activity
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Activity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ankit</td>
+                        <td>Created Task #104</td>
+                        <td>Today</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sarah</td>
+                        <td>Updated User Profile</td>
+                        <td>Today</td>
+                    </tr>
+
+                    <tr>
+                        <td>Ram</td>
+                        <td>Completed Task #98</td>
+                        <td>Yesterday</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
