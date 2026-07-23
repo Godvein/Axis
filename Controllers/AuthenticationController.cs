@@ -4,7 +4,7 @@ namespace Axis.Controllers
 {
     public class AuthenticationController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
