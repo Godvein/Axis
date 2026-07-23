@@ -1,14 +1,13 @@
 -- User Login SP
 create proc usp_Login 
 @Username varchar(100),
-@PasswordHash varchar(255),
 @returnMsg varchar(50) out
 as
 begin
-if exists (select 1 from Users where Username = @Username and PasswordHash = @PasswordHash)
+if exists (select 1 from Users where Username = @Username)
 begin 
 select UserId, Username, FullName, RoleId, IsActive 
-from Users where Username = @Username and PasswordHash = @PasswordHash 
+from Users where Username = @Username  
 set @returnMsg = 'ok'
 end
 else
@@ -18,7 +17,7 @@ end
 end
 go
 
--- Get User by Id SP
+-- Get User SP
 create proc usp_GetUsers
 @UserId int,
 @flag int

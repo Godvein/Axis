@@ -1,3 +1,6 @@
+using Axis.Repositories;
+using Axis.Services;
+
 namespace Axis
 {
     public class Program
@@ -8,6 +11,17 @@ namespace Axis
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            // session registration
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -22,7 +36,10 @@ namespace Axis
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapStaticAssets();
             app.MapControllerRoute(
