@@ -25,13 +25,13 @@ as
 begin
 if @flag = 0
 begin
-select Username, FullName, Email, RoleId, IsActive, CreatedAt from Users
+select Username, FullName, Email, RoleId, DepartmentId, IsActive, CreatedAt from Users
 where UserId = @UserId
 end
 if @flag = 1
 begin
-select u.UserId, u.Username, u.FullName, r.RoleName, u.IsActive from Users u
-left join Roles r on u.RoleId = r.RoleId
+select u.UserId, u.Username, u.FullName, r.RoleName, d.DepartmentName, u.IsActive from Users u
+left join Roles r on u.RoleId = r.RoleId left join Departments d on u.DepartmentId = d.DepartmentId
 end
 end
 
@@ -151,3 +151,13 @@ begin
 insert into Users (Username, PasswordHash, FullName, Email, RoleId, IsActive, DepartmentId)
 values (@Username, @PasswordHash, @FullName, @Email, @RoleId, '1', @DepartmentId);
 end
+go
+
+-- Delete User SP
+create proc usp_DeleteUser 
+@UserId int
+as
+begin
+delete from Users where UserId = @UserId
+end
+go

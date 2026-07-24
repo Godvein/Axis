@@ -6,5 +6,6 @@ namespace Axis.Services
     {
         public void CreateUser(CreateUserViewModel createUserViewModel);
         public List<UserListViewModel> GetUserList();
+        public void DeleteUser(int id);
     }
 }

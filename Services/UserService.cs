@@ -32,5 +32,10 @@ namespace Axis.Services
         {
             return _userRepository.GetUserList();
         }
+
+        public void DeleteUser(int id)
+        {
+            _userRepository.DeleteUser(id);
+        }
     }
 }

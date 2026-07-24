@@ -47,5 +47,11 @@ namespace Axis.Controllers
             return RedirectToAction("CreateUser", "Admin");
         }
         #endregion
+
+        public IActionResult DeleteUser([FromRoute] int id)
+        {
+            _userService.DeleteUser(id);
+            return RedirectToAction("Users", "Admin");
+        }
     }
 }

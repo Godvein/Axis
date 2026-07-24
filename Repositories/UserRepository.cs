@@ -38,5 +38,15 @@ namespace Axis.Repositories
             return users;
         }
         #endregion
+
+        #region delete user repository
+        public void DeleteUser(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            connection.Execute("usp_DeleteUser", new { UserId = id }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
+        #endregion
     }
 }

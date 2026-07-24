@@ -55,6 +55,7 @@
                         <th>Username</th>
                         <th>Full Name</th>
                         <th>Role</th>
+                        <th>Department</th>
                         <th>Status</th>
                         <th width="220">Actions</th>
                     </tr>
@@ -71,6 +72,7 @@
                                 <td>@user.Username</td>
                                 <td>@user.FullName</td>
                                 <td>@user.RoleName</td>
+								<td>@user.DepartmentName</td>
 
                                 <td>
                                     @if (user.IsActive)
@@ -95,12 +97,13 @@
                                        class="btn btn-sm btn-info text-white">
                                         Details
                                     </a>
-
+                                @if (user.UserId != Context.Session.GetInt32("UserId")){
                                     <a asp-action="DeleteUser"
                                        asp-route-id="@user.UserId"
                                        class="btn btn-sm btn-danger">
                                         Delete
                                     </a>
+                                }
                                 </td>
                             </tr>
                         }
