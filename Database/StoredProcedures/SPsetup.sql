@@ -161,3 +161,21 @@ begin
 delete from Users where UserId = @UserId
 end
 go
+
+-- Edit User SP
+create proc usp_UpdateUser
+@UserId int,
+@Username varchar(100),
+@FullName varchar(100),
+@Email varchar(100),
+@RoleId int,
+@DepartmentId int,
+@IsActive bit
+
+as
+begin
+update Users set Username = @Username, FullName = @FullName,
+Email = @Email, RoleId = @RoleId, DepartmentId = @DepartmentId, IsActive = @IsActive
+where UserId = @UserId
+end
+go

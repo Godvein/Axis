@@ -37,5 +37,15 @@ namespace Axis.Services
         {
             _userRepository.DeleteUser(id);
         }
+
+        public EditUserViewModel? GetUserById(int id)
+        {
+            return _userRepository.GetUserById(id);
+        }
+
+        public void EditUser(EditUserViewModel editUserViewModel)
+        {
+            _userRepository.EditUser(editUserViewModel);
+        }
     }
 }

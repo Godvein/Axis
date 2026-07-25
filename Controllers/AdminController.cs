@@ -27,7 +27,7 @@ namespace Axis.Controllers
 
         public IActionResult Users()
         {
-            var users = _userService.GetUserList();
+            List<UserListViewModel> users = _userService.GetUserList();
             return View(users);
         }
         #region create user controller
@@ -48,6 +48,30 @@ namespace Axis.Controllers
         }
         #endregion
 
+        #region edit user controller
+        public IActionResult EditUser([FromRoute] int id)
+        {
+            EditUserViewModel? editUserViewModel = _userService.GetUserById(id);
+            if (editUserViewModel == null)
+            {
+                return NotFound();
+            }
+            editUserViewModel.Roles = _roleService.GetRoles();
+            editUserViewModel.Departments = _departmentService.GetDepartments();
+            return View(editUserViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(EditUserViewModel editUserViewModel)
+        {
+            if (editUserViewModel != null)
+            {
+                _userService.EditUser(editUserViewModel);
+                return RedirectToAction("Users", "Admin");
+            }
+            return RedirectToAction("Error", "Home");
+        }
+        #endregion
         public IActionResult DeleteUser([FromRoute] int id)
         {
             _userService.DeleteUser(id);

@@ -48,5 +48,29 @@ namespace Axis.Repositories
             connection.Close();
         }
         #endregion
+
+        public EditUserViewModel? GetUserById(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var user = connection.QueryFirstOrDefault<EditUserViewModel>("usp_GetUsers",
+                new { flag = 0, UserId = id }, commandType: CommandType.StoredProcedure);
+            if(user != null)
+                user.UserId = id;
+            connection.Close();
+            return user;
+        }
+        
+        public void EditUser(EditUserViewModel editUserViewModel)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            connection.Execute("usp_UpdateUser",
+                new { UserId = editUserViewModel.UserId, Username = editUserViewModel.Username, 
+                    FullName = editUserViewModel.FullName, Email = editUserViewModel.Email, RoleId = editUserViewModel.RoleId,
+                    DepartmentId = editUserViewModel.DepartmentId, IsActive = editUserViewModel.IsActive },
+                commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
     }
 }

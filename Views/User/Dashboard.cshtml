@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h2>Welcome, Ankit 👋</h2>
+        <p class="text-muted">Here's a summary of your work.</p>
+    </div>
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card border-primary shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Assigned Tasks</h5>
+                    <h2 class="text-primary">12</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-success shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Completed</h5>
+                    <h2 class="text-success">7</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-warning shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Pending</h5>
+                    <h2 class="text-warning">5</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <h5 class="mb-0">My Tasks</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+            <table class="table table-hover mb-0">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Implement Login Authentication</td>
+                        <td><span class="badge bg-danger">High</span></td>
+                        <td>25 Jul 2026</td>
+                        <td><span class="badge bg-warning text-dark">In Progress</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Create User Management Module</td>
+                        <td><span class="badge bg-primary">Medium</span></td>
+                        <td>28 Jul 2026</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Fix Dashboard UI</td>
+                        <td><span class="badge bg-secondary">Low</span></td>
+                        <td>30 Jul 2026</td>
+                        <td><span class="badge bg-secondary">Pending</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+            <h5 class="mb-0">Recent Activity</h5>
+        </div>
+
+        <div class="card-body">
+
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item">
+                    ✅ Completed <strong>Create User Module</strong>
+                    <small class="text-muted float-end">2 hours ago</small>
+                </li>
+
+                <li class="list-group-item">
+                    📝 Updated task <strong>Authentication</strong>
+                    <small class="text-muted float-end">Yesterday</small>
+                </li>
+
+                <li class="list-group-item">
+                    📌 Assigned new task <strong>Department Management</strong>
+                    <small class="text-muted float-end">2 days ago</small>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
