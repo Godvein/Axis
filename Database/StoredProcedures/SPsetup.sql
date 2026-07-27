@@ -179,3 +179,23 @@ Email = @Email, RoleId = @RoleId, DepartmentId = @DepartmentId, IsActive = @IsAc
 where UserId = @UserId
 end
 go
+
+-- User DashboardInfo SP
+CREATE PROC usp_UserDashboardInfo
+    @UserId INT,
+    @AssignedTasks INT OUT,
+    @CompletedTasks INT OUT,
+    @PendingTasks INT OUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Assign all variables in a single optimized pass over the data
+    SELECT 
+        @AssignedTasks = COUNT(TaskId),
+        @CompletedTasks = SUM(CASE WHEN Completed = 1 THEN 1 ELSE 0 END),
+        @PendingTasks = SUM(CASE WHEN DueDate > GETDATE() AND Completed = 0 THEN 1 ELSE 0 END)
+    FROM Tasks
+    WHERE AssignedTo = @UserId;
+END
+go

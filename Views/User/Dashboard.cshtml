@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "User Dashboard";
 }
-
+@model Axis.Models.ViewModels.UserDashboardViewModel
 <div class="container mt-4">
 
     <div class="mb-4">
@@ -15,7 +15,7 @@
             <div class="card border-primary shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Assigned Tasks</h5>
-                    <h2 class="text-primary">12</h2>
+                    <h2 class="text-primary">@Model.AssignedTasksCount</h2>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="card border-success shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Completed</h5>
-                    <h2 class="text-success">7</h2>
+                    <h2 class="text-success">@Model.CompletedTasksCount</h2>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="card border-warning shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Pending</h5>
-                    <h2 class="text-warning">5</h2>
+                    <h2 class="text-warning">@Model.PendingTasksCount</h2>
                 </div>
             </div>
         </div>

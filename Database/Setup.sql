@@ -34,6 +34,7 @@ Create Table Tasks (
 	DueDate datetime,
 	AssignedTo int,
 	CreatedBy int,
+	Completed bit,
 	CreatedAt datetime default getdate(),
 	UpdatedAt datetime default getdate()
 	foreign key (AssignedTo) references Users(UserId),
