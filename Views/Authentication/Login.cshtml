@@ -4,7 +4,7 @@
 }
 <div class="align-content-center">
 <h1>Login</h1> 
-<form asp-controller="Authentication" asp-action="Login" method="post">
+<form id="loginform" asp-controller="Authentication" asp-action="Login" method="post">
     <div class="form-group">
         <label asp-for="Username"></label>
         <input asp-for="Username" class="form-control" />
@@ -20,3 +20,8 @@
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Authentication/Login.js"></script>
+}
