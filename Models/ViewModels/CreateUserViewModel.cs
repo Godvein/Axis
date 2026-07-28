@@ -13,7 +13,6 @@ namespace Axis.Models.ViewModels
         [Required]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; } = string.Empty;
-        [Required]
         public string Email { get; set; } = string.Empty;
         [Required]
         public int RoleId { get; set; } = 0;
