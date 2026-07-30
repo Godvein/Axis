@@ -12,12 +12,14 @@ namespace Axis.Controllers
         private readonly IDepartmentService _departmentService;
         private readonly IRoleService _roleService;
         private readonly IUserService _userService;
-        public AdminController(IAdminDashboardService adminDashboardService, IDepartmentService departmentService, IRoleService roleService, IUserService userService)
+        private readonly ITaskService _taskService;
+        public AdminController(IAdminDashboardService adminDashboardService, IDepartmentService departmentService, IRoleService roleService, IUserService userService, ITaskService taskService)
         {
             _adminDashboardService = adminDashboardService;
             _departmentService = departmentService;
             _roleService = roleService;
             _userService = userService;
+            _taskService = taskService;
         }
         public IActionResult Dashboard()
         {
@@ -92,6 +94,14 @@ namespace Axis.Controllers
             CreateTaskViewModel createTaskViewModel = new CreateTaskViewModel();
             createTaskViewModel.Users = users;
             return View(createTaskViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddTask(CreateTaskViewModel createTaskViewModel)
+        {
+            int id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            _taskService.AddTask(createTaskViewModel, id);
+            return RedirectToAction("Tasks", "Admin");    
         }
         #endregion
     }

@@ -24,6 +24,8 @@ namespace Axis
             builder.Services.AddScoped<IUserService, UserService>();   
             builder.Services.AddScoped<IUserDashboardRepository, UserDashboardRepository>();
             builder.Services.AddScoped<IUserDashboardService, UserDashboardService>();
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+            builder.Services.AddScoped<ITaskService, TaskService>();
 
             // session registration
             builder.Services.AddDistributedMemoryCache();
