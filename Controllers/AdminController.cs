@@ -78,11 +78,21 @@ namespace Axis.Controllers
             _userService.DeleteUser(id);
             return RedirectToAction("Users", "Admin");
         }
-#endregion
-   
+        #endregion
+
+        #region Task Management
         public IActionResult Tasks()
         {
             return View();
         }
+
+        public IActionResult AddTask()
+        {
+            List<UserListViewModel> users = _userService.GetUserList();
+            CreateTaskViewModel createTaskViewModel = new CreateTaskViewModel();
+            createTaskViewModel.Users = users;
+            return View(createTaskViewModel);
+        }
+        #endregion
     }
 }
