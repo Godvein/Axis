@@ -1,0 +1,178 @@
+﻿```cshtml
+@{
+    ViewData["Title"] = "Task Management";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="card border-0 shadow">
+
+        <div class="card-header bg-success text-white py-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h3 class="mb-1">
+                        📋 Task Management
+                    </h3>
+                    <small>
+                        Assign, monitor and manage employee tasks
+                    </small>
+                </div>
+
+                <a asp-action="CreateTask"
+                   class="btn btn-light">
+                    ➕ New Task
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body bg-light">
+
+            <div class="row g-2 mb-4">
+
+                <div class="col-lg-4">
+                    <input class="form-control"
+                           placeholder="🔍 Search task..." />
+                </div>
+
+                <div class="col-lg-2">
+                    <select class="form-select">
+                        <option>Status</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2">
+                    <select class="form-select">
+                        <option>Priority</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2">
+                    <select class="form-select">
+                        <option>Department</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2">
+                    <button class="btn btn-success w-100">
+                        Filter
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Task Card -->
+
+            <div class="card mb-3 border-start border-4 border-danger">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h5 class="mb-1">
+                                Implement Login Module
+                            </h5>
+
+                            <p class="text-muted mb-2">
+                                Assigned to John Smith • IT Department
+                            </p>
+
+                            <span class="badge bg-danger">
+                                High Priority
+                            </span>
+
+                            <span class="badge bg-warning text-dark">
+                                In Progress
+                            </span>
+
+                            <span class="text-muted ms-3">
+                                Due: 30 Jul 2026
+                            </span>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <a href="#" class="btn btn-outline-success btn-sm">
+                                ✏ Edit
+                            </a>
+
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                👁 View
+                            </a>
+
+                            <a href="#" class="btn btn-outline-danger btn-sm">
+                                🗑 Delete
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card mb-3 border-start border-4 border-success">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h5 class="mb-1">
+                                Monthly Payroll Review
+                            </h5>
+
+                            <p class="text-muted mb-2">
+                                Assigned to Sarah Lee • HR Department
+                            </p>
+
+                            <span class="badge bg-secondary">
+                                Low Priority
+                            </span>
+
+                            <span class="badge bg-success">
+                                Completed
+                            </span>
+
+                            <span class="text-muted ms-3">
+                                Due: 25 Jul 2026
+                            </span>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <a href="#" class="btn btn-outline-success btn-sm">
+                                ✏ Edit
+                            </a>
+
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                👁 View
+                            </a>
+
+                            <a href="#" class="btn btn-outline-danger btn-sm">
+                                🗑 Delete
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```

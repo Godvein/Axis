@@ -25,6 +25,7 @@ namespace Axis.Controllers
             return View(adminDashboardInfo);
         }
 
+        #region User Management
         public IActionResult Users()
         {
             List<UserListViewModel> users = _userService.GetUserList();
@@ -76,6 +77,12 @@ namespace Axis.Controllers
         {
             _userService.DeleteUser(id);
             return RedirectToAction("Users", "Admin");
+        }
+#endregion
+   
+        public IActionResult Tasks()
+        {
+            return View();
         }
     }
 }
