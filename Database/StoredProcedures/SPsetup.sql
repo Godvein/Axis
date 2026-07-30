@@ -92,8 +92,10 @@ as
 begin
 if @flag = 0
 begin
-select TaskId, Title, Description, Priority, Status, DueDate, AssignedTo,
-CreatedBy, CreatedAt, UpdatedAt from Tasks
+select t.TaskId, t.Title, t.Priority, t.Status, t.DueDate, assigned.Username as AssignedTo,
+created.Username as CreatedBy, t.Completed from Tasks t 
+left join Users assigned on assigned.UserId = t.AssignedTo
+left join Users created on created.UserId = t.CreatedBy
 end
 
 if @flag = 1

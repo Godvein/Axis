@@ -5,5 +5,6 @@ namespace Axis.Repositories
     public interface ITaskRepository
     {
         public void AddTask(CreateTaskViewModel createTaskViewModel, int id);
+        public List<TaskListViewModel> GetTaskList();
     }
 }

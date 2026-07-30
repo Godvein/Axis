@@ -31,5 +31,14 @@ namespace Axis.Repositories
                 commandType: System.Data.CommandType.StoredProcedure);
             connection.Close();
         }
+
+        public List<TaskListViewModel> GetTaskList()
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var tasks = connection.Query<TaskListViewModel>("usp_GetTasks", new{TaskId = 0, flag = 0}, commandType: CommandType.StoredProcedure).ToList();
+            connection.Close();
+            return tasks;
+        }
     }
 }

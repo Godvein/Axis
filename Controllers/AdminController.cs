@@ -85,7 +85,8 @@ namespace Axis.Controllers
         #region Task Management
         public IActionResult Tasks()
         {
-            return View();
+            List<TaskListViewModel> tasks = _taskService.GetTaskList();
+            return View(tasks);
         }
 
         public IActionResult AddTask()

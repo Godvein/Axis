@@ -14,5 +14,9 @@ namespace Axis.Services
         {
             _taskRepository.AddTask(createTaskViewModel, id);
         }
+        public List<TaskListViewModel> GetTaskList()
+        {
+            return _taskRepository.GetTaskList();
+        }
     }
 }
