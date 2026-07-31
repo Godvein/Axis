@@ -67,7 +67,7 @@ create proc usp_UpdateTask
 
 as
 begin
-update Task set Title = @Title, Description = @Description, Priority = @Priority,
+update Tasks set Title = @Title, Description = @Description, Priority = @Priority,
 Status = @Status, DueDate = @DueDate, AssignedTo = @AssignedTo, CreatedBy = @CreatedBy
 where TaskId = @TaskId
 end
@@ -100,7 +100,9 @@ end
 
 if @flag = 1
 begin
-select * from Tasks where TaskId = @TaskId
+select t.TaskId, t.Title, t.Description, t.Priority, t.Status, t.AssignedTo, t.DueDate
+, u.Username as CreatedBy, t.CreatedAt from Tasks t left join Users u 
+on u.UserId = t.CreatedBy where TaskId = @TaskId
 end
 end
 go

@@ -111,5 +111,26 @@ namespace Axis.Controllers
             return RedirectToAction("Tasks", "Admin");
         }
         #endregion
+        public IActionResult EditTask([FromRoute] int id)
+        {
+            EditTaskViewModel? editTaskViewModel = _taskService.GetTaskViewModel(id);
+            if (editTaskViewModel == null)
+            {
+                return NotFound();
+            }
+            editTaskViewModel.Users = _userService.GetUserList();
+            return View(editTaskViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditTask(EditTaskViewModel editTaskViewModel)
+        {
+            if (editTaskViewModel != null)
+            {
+               _taskService.UpdateTask(editTaskViewModel, HttpContext.Session.GetInt32("UserId") ?? 0);
+                return RedirectToAction("Tasks", "Admin");
+            }
+            return RedirectToAction("Error", "Home");
+        }
     }
 }

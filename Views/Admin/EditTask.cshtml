@@ -1,0 +1,180 @@
+﻿@model Axis.Models.ViewModels.EditTaskViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h3 class="mb-0">
+                    Edit Task
+                </h3>
+
+                <span class="badge bg-dark">
+                    Task #@Model.TaskId
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="EditTask"
+                  asp-controller="Admin"
+                  method="post">
+
+                <input asp-for="TaskId" type="hidden" />
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <div class="mb-3">
+
+                            <label asp-for="Title"></label>
+
+                            <input asp-for="Title"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="Description"></label>
+
+                            <textarea asp-for="Description"
+                                      rows="10"
+                                      class="form-control">
+                            </textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+                        <div class="card bg-light">
+
+                            <div class="card-header">
+                                Task Information
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="mb-3">
+
+                                    <label asp-for="AssignedTo"></label>
+
+                                    <select asp-for="AssignedTo"
+                                            asp-items="@(new SelectList(Model.Users, "UserId", "FullName"))"
+                                            class="form-select">
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label asp-for="Priority"></label>
+
+                                    <select asp-for="Priority"
+                                            class="form-select">
+
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label asp-for="Status"></label>
+
+                                    <select asp-for="Status"
+                                            class="form-select">
+
+                                        <option value="Pending">Pending</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label asp-for="DueDate"></label>
+
+                                    <input asp-for="DueDate"
+                                           type="date"
+                                           class="form-control" />
+
+                                </div>
+
+                                <hr />
+
+                                <div class="small text-muted">
+
+                                    <p class="mb-1">
+                                        <strong>Created By:</strong>
+                                        @Model.CreatedBy
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <strong>Created At:</strong>
+                                        @Model.CreatedAt.ToString("dd MMM yyyy HH:mm")
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <button class="btn btn-warning"
+                        type="submit">
+
+                    Save Changes
+
+                </button>
+
+                <a asp-action="Tasks"
+                   class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

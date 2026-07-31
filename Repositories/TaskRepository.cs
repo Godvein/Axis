@@ -48,5 +48,32 @@ namespace Axis.Repositories
             connection.Execute("usp_DeleteTask", new { TaskId = id }, commandType: CommandType.StoredProcedure);
             connection.Close();
         }
+        public EditTaskViewModel? GetTaskViewModel(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var task = connection.QueryFirstOrDefault<EditTaskViewModel>("usp_GetTasks", new { TaskId = id, flag = 1 }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return task;
+        }
+        public void UpdateTask(EditTaskViewModel editTaskViewModel, int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            connection.Execute("usp_UpdateTask",
+                new
+                {
+                    TaskId = editTaskViewModel.TaskId,
+                    Title = editTaskViewModel.Title,
+                    Description = editTaskViewModel.Description,
+                    Priority = editTaskViewModel.Priority,
+                    Status = editTaskViewModel.Status,
+                    DueDate = editTaskViewModel.DueDate,
+                    AssignedTo = editTaskViewModel.AssignedTo,
+                    CreatedBy = id
+                },
+                commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
     }
 }
