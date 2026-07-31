@@ -79,7 +79,7 @@ create proc usp_DeleteTask
 
 as
 begin
-delete from Task where TaskId = @TaskId
+delete from Tasks where TaskId = @TaskId
 end
 go
 

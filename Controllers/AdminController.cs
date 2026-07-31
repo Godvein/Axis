@@ -104,6 +104,12 @@ namespace Axis.Controllers
             _taskService.AddTask(createTaskViewModel, id);
             return RedirectToAction("Tasks", "Admin");    
         }
+
+        public IActionResult DeleteTask([FromRoute] int id)
+        {
+            _taskService.DeleteTask(id);
+            return RedirectToAction("Tasks", "Admin");
+        }
         #endregion
     }
 }

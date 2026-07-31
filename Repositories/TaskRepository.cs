@@ -40,5 +40,13 @@ namespace Axis.Repositories
             connection.Close();
             return tasks;
         }
+
+        public void DeleteTask(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            connection.Execute("usp_DeleteTask", new { TaskId = id }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
     }
 }

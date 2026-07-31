@@ -18,5 +18,10 @@ namespace Axis.Services
         {
             return _taskRepository.GetTaskList();
         }
+
+        public void DeleteTask(int id)
+        {
+            _taskRepository.DeleteTask(id);
+        }
     }
 }
