@@ -1,0 +1,125 @@
+﻿@model Axis.Models.ViewModels.TaskDetailsViewModel
+
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white d-flex justify-content-between">
+
+            <div>
+                <h3 class="mb-0">Task Details</h3>
+                <small>Task #@Model.TaskId</small>
+            </div>
+
+            <div>
+
+                @if (Model.Completed)
+                {
+                    <span class="badge bg-success fs-6">Completed</span>
+                }
+                else
+                {
+                    <span class="badge bg-warning text-dark fs-6">@Model.Status</span>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <h4>@Model.Title</h4>
+
+                    <hr />
+
+                    <label class="fw-bold">Description</label>
+
+                    <div class="border rounded p-3 bg-light">
+                        @Model.Description
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            Task Information
+                        </div>
+
+                        <div class="card-body">
+
+                            <table class="table table-borderless">
+
+                                <tr>
+                                    <td><strong>Priority</strong></td>
+                                    <td>@Model.Priority</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Status</strong></td>
+                                    <td>@Model.Status</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Assigned To</strong></td>
+                                    <td>@Model.AssignedTo</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Created By</strong></td>
+                                    <td>@Model.CreatedBy</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Due Date</strong></td>
+                                    <td>@Model.DueDate?.ToString("dd MMM yyyy")</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Created At</strong></td>
+                                    <td>@Model.CreatedAt.ToString("dd MMM yyyy HH:mm")</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Updated At</strong></td>
+                                    <td>@Model.UpdatedAt?.ToString("dd MMM yyyy HH:mm")</td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <a asp-action="EditTask"
+               asp-route-id="@Model.TaskId"
+               class="btn btn-warning">
+                Edit Task
+            </a>
+
+            <a asp-action="Tasks"
+               class="btn btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

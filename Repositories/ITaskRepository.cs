@@ -9,5 +9,6 @@ namespace Axis.Repositories
         public void DeleteTask(int id);
         public EditTaskViewModel? GetTaskViewModel(int id);
         public void UpdateTask(EditTaskViewModel editTaskViewModel, int id);
+        public TaskDetailsViewModel? GetTaskDetails(int id);
     }
 }

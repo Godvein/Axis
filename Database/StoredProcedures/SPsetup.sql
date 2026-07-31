@@ -104,6 +104,13 @@ select t.TaskId, t.Title, t.Description, t.Priority, t.Status, t.AssignedTo, t.D
 , u.Username as CreatedBy, t.CreatedAt from Tasks t left join Users u 
 on u.UserId = t.CreatedBy where TaskId = @TaskId
 end
+if @flag = 2
+begin
+select t.TaskId, t.Title, t.Description, t.Priority, t.Status,
+u1.Username as AssignedTo, u2.Username as CreatedBy, t.CreatedBy,
+t.UpdatedAt, t.DueDate, t.Completed from Tasks t left join Users u1
+on u1.UserId = t.AssignedTo left join Users u2 on u2.UserId = t.CreatedBy
+end
 end
 go
 

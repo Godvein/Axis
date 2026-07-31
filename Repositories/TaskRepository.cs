@@ -75,5 +75,14 @@ namespace Axis.Repositories
                 commandType: CommandType.StoredProcedure);
             connection.Close();
         }
+
+        public TaskDetailsViewModel? GetTaskDetails(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var task = connection.QueryFirstOrDefault<TaskDetailsViewModel>("usp_GetTasks", new { TaskId = id, flag = 2 }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return task;
+        }
     }
 }

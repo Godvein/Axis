@@ -31,5 +31,9 @@ namespace Axis.Services
         {
             _taskRepository.UpdateTask(editTaskViewModel, id);
         }
+        public TaskDetailsViewModel? GetTaskDetails(int id)
+        {
+            return _taskRepository.GetTaskDetails(id);
+        }
     }
 }

@@ -132,5 +132,15 @@ namespace Axis.Controllers
             }
             return RedirectToAction("Error", "Home");
         }
+
+        public IActionResult TaskDetails([FromRoute] int id)
+        {
+            TaskDetailsViewModel? taskDetailsViewModel = _taskService.GetTaskDetails(id);
+            if (taskDetailsViewModel == null)
+            {
+                return NotFound();
+            }
+            return View(taskDetailsViewModel);
+        }
     }
 }
