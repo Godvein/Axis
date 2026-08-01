@@ -12,6 +12,14 @@ namespace Axis.Services
         }
         public void AddTask(CreateTaskViewModel createTaskViewModel, int id)
         {
+            if (createTaskViewModel.Status == "Completed")
+            {
+                createTaskViewModel.Completed = true;
+            }
+            else
+            {
+                createTaskViewModel.Completed = false;
+            }
             _taskRepository.AddTask(createTaskViewModel, id);
         }
         public List<TaskListViewModel> GetTaskList()

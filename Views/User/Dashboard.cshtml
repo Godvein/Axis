@@ -14,7 +14,7 @@
 
     <div class="row mb-4">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card border-primary shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Assigned Tasks</h5>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card border-success shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Completed</h5>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card border-warning shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title">Pending</h5>
@@ -41,7 +41,17 @@
             </div>
         </div>
 
+        <div class="col-md-3">
+            <div class="card border-danger shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Overdue</h5>
+                    <h2 class="text-danger">@Model.OverdueTasksCount</h2>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 
     <div class="card shadow-sm mb-4">
 

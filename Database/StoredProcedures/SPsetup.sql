@@ -45,12 +45,13 @@ create proc usp_CreateTask
 @Status varchar(50),
 @DueDate datetime,
 @AssignedTo int,
-@CreatedBy int
+@CreatedBy int,
+@Completed bit
 
 as
 begin
-insert into Tasks (Title, Description, Priority, Status, DueDate, AssignedTo, CreatedBy)
-values (@Title, @Description, @Priority, @Status, @DueDate, @AssignedTo, @CreatedBy)
+insert into Tasks (Title, Description, Priority, Status, DueDate, AssignedTo, CreatedBy, Completed)
+values (@Title, @Description, @Priority, @Status, @DueDate, @AssignedTo, @CreatedBy, @Completed)
 end
 go
 
@@ -201,11 +202,21 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Assign all variables in a single optimized pass over the data
-    SELECT 
+      SELECT 
         @AssignedTasks = COUNT(TaskId),
         @CompletedTasks = SUM(CASE WHEN Completed = 1 THEN 1 ELSE 0 END),
-        @PendingTasks = SUM(CASE WHEN DueDate > GETDATE() AND Completed = 0 THEN 1 ELSE 0 END)
+        @PendingTasks =  ISNULL(
+    SUM(CASE WHEN Completed = 0 THEN 1 ELSE 0 END),
+    0),
+        @OverdueTasks = ISNULL(
+    SUM(CASE
+        WHEN Completed = 0
+         AND DueDate < GETDATE()
+        THEN 1
+        ELSE 0
+    END),
+    0
+)
     FROM Tasks
     WHERE AssignedTo = @UserId;
  select t.TaskId, t.Title, t.Priority, t.Status, t.DueDate, assigned.Username as AssignedTo,

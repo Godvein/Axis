@@ -26,7 +26,8 @@ namespace Axis.Repositories
                     Status = createTaskViewModel.Status,
                     DueDate = createTaskViewModel.DueDate,
                     AssignedTo = createTaskViewModel.AssignedTo,
-                    CreatedBy = id
+                    CreatedBy = id,
+                    Completed = createTaskViewModel.Completed
                 },
                 commandType: System.Data.CommandType.StoredProcedure);
             connection.Close();

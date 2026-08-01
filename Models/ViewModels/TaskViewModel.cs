@@ -24,6 +24,7 @@
         public DateTime? DueDate { get; set; }
 
         public List<UserListViewModel> Users { get; set; } = new();
+        public bool Completed { get; set; }
     }
     public class EditTaskViewModel
     {
