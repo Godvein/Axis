@@ -23,13 +23,15 @@ namespace Axis.Repositories
             parameters.Add("@AssignedTasks", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
             parameters.Add("@CompletedTasks", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
             parameters.Add("@PendingTasks", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-            connection.Execute("usp_UserDashboardInfo", parameters, commandType: CommandType.StoredProcedure);
+            var result = connection.QueryMultiple("usp_UserDashboardInfo", parameters, commandType: CommandType.StoredProcedure);
+            var tasks = result.Read<TaskListViewModel>().ToList();
             connection.Close();
             return new UserDashboardViewModel
             {
                 AssignedTasksCount = parameters.Get<int?>("@AssignedTasks") ?? 0,
                 CompletedTasksCount = parameters.Get<int?>("@CompletedTasks") ?? 0,
-                PendingTasksCount = parameters.Get<int?>("@PendingTasks") ?? 0
+                PendingTasksCount = parameters.Get<int?>("@PendingTasks") ?? 0,
+                Tasks = tasks
             };
         }
     }

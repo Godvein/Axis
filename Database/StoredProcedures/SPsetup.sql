@@ -208,5 +208,9 @@ BEGIN
         @PendingTasks = SUM(CASE WHEN DueDate > GETDATE() AND Completed = 0 THEN 1 ELSE 0 END)
     FROM Tasks
     WHERE AssignedTo = @UserId;
+ select t.TaskId, t.Title, t.Priority, t.Status, t.DueDate, assigned.Username as AssignedTo,
+    created.Username as CreatedBy, t.Completed from Tasks t 
+    left join Users assigned on assigned.UserId = t.AssignedTo
+    left join Users created on created.UserId = t.CreatedBy where assigned.UserId = @UserId
 END
 go
