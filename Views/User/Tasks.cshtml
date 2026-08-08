@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Axis.Models.ViewModels.TaskListViewModel>
+
+@{
+    ViewData["Title"] = "My Tasks";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>My Tasks</h2>
+            <p class="text-muted mb-0">
+                View and track your assigned tasks.
+            </p>
+        </div>
+
+        <a asp-controller="User"
+           asp-action="Dashboard"
+           class="btn btn-outline-secondary">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+            <h5 class="mb-0">Assigned Tasks</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Task</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Due Date</th>
+                            <th>Created By</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var task in Model)
+                            {
+                                <tr>
+
+                                    <!-- Task -->
+                                    <td>
+                                        <strong>@task.Title</strong>
+                                    </td>
+
+                                    <!-- Priority -->
+                                    <td>
+                                        @if (task.Priority == "High")
+                                        {
+                                            <span class="badge bg-danger">
+                                                High
+                                            </span>
+                                        }
+                                        else if (task.Priority == "Medium")
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                Medium
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                @task.Priority
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <!-- Status -->
+                                    <td>
+                                        @if (task.Completed)
+                                        {
+                                            <span class="badge bg-success">
+                                                Completed
+                                            </span>
+                                        }
+                                        else if (task.Status == "In Progress")
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                In Progress
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                @task.Status
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <!-- Due Date -->
+                                    <td>
+                                        @if (!task.Completed && task.DueDate < DateTime.Now)
+                                        {
+                                            <span class="text-danger fw-bold">
+                                                @task.DueDate.ToString("dd MMM yyyy")
+                                            </span>
+                                            <br />
+                                            <span class="badge bg-danger">
+                                                Overdue
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            @task.DueDate.ToString("dd MMM yyyy")
+                                        }
+                                    </td>
+
+                                    <!-- Created By -->
+                                    <td>
+                                        @task.CreatedBy
+                                    </td>
+
+                                    <!-- Action -->
+                                    <td>
+                                        <a asp-controller="User"
+                                           asp-action="TaskDetails"
+                                           asp-route-id="@task.TaskId"
+                                           class="btn btn-sm btn-outline-info">
+                                            View
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6"
+                                    class="text-center text-muted py-5">
+
+                                    <div class="mb-2 fs-3">📋</div>
+
+                                    <strong>No tasks assigned</strong>
+
+                                    <div>
+                                        You currently don't have any tasks.
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

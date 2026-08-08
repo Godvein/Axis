@@ -32,5 +32,12 @@ namespace Axis.Controllers
                 return RedirectToAction("AccessDenied", "Authentication");
             }
         }
+
+        public IActionResult Tasks()
+        {
+            List<TaskListViewModel> model = _taskService.GetTaskList();
+            model = model.Where(m => m.AssignedTo == HttpContext.Session.GetString("Username")).ToList();
+            return View(model);
+        }
     }
 }
