@@ -225,3 +225,12 @@ BEGIN
     left join Users created on created.UserId = t.CreatedBy where assigned.UserId = @UserId
 END
 go
+
+create proc usp_MarkTaskCompleted
+@id int
+
+as
+begin
+update Tasks set Completed = 1 where TaskId = @id
+end
+go

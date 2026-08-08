@@ -85,5 +85,13 @@ namespace Axis.Repositories
             connection.Close();
             return task;
         }
+
+        public void MarkTaskCompleted(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            connection.Execute("usp_MarkTaskCompleted", new { id = id }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
     }
 }

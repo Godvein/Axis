@@ -39,5 +39,12 @@ namespace Axis.Controllers
             model = model.Where(m => m.AssignedTo == HttpContext.Session.GetString("Username")).ToList();
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult MarkTaskCompleted(int id)
+        {
+            _taskService.MarkTaskCompleted(id);
+            return RedirectToAction("Tasks");
+        }
     }
 }

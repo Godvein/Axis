@@ -43,5 +43,9 @@ namespace Axis.Services
         {
             return _taskRepository.GetTaskDetails(id);
         }
+        public void MarkTaskCompleted(int id)
+        {
+            _taskRepository.MarkTaskCompleted(id);
+        }   
     }
 }
