@@ -1,0 +1,199 @@
+﻿@model Axis.Models.ViewModels.TaskDetailsViewModel
+
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Task Details</h2>
+            <p class="text-muted mb-0">
+                View the details and current status of your assigned task.
+            </p>
+        </div>
+
+        <a asp-controller="User"
+           asp-action="Tasks"
+           class="btn btn-outline-secondary">
+            ← Back to Tasks
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">@Model.Title</h4>
+
+            <div>
+                @if (Model.Completed)
+                {
+                    <span class="badge bg-success fs-6">Completed</span>
+                }
+                else if (Model.Status == "In Progress")
+                {
+                    <span class="badge bg-warning text-dark fs-6">In Progress</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary fs-6">@Model.Status</span>
+                }
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Description -->
+            <div class="mb-4">
+                <h5>Description</h5>
+
+                <div class="border rounded p-3 bg-light">
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        @Model.Description
+                    }
+                    else
+                    {
+                        <span class="text-muted">
+                            No description provided.
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <!-- Task Information -->
+            <h5 class="mb-3">Task Information</h5>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <strong>Priority</strong>
+                    <div class="mt-1">
+                        @if (Model.Priority == "High")
+                        {
+                            <span class="badge bg-danger">High</span>
+                        }
+                        else if (Model.Priority == "Medium")
+                        {
+                            <span class="badge bg-warning text-dark">Medium</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.Priority</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Status</strong>
+                    <div class="mt-1">
+                        @if (Model.Completed)
+                        {
+                            <span class="badge bg-success">Completed</span>
+                        }
+                        else if (Model.Status == "In Progress")
+                        {
+                            <span class="badge bg-warning text-dark">In Progress</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.Status</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Assigned To</strong>
+                    <div class="mt-1">
+                        @Model.AssignedTo
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Created By</strong>
+                    <div class="mt-1">
+                        @Model.CreatedBy
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Created At</strong>
+                    <div class="mt-1">
+                        @Model.CreatedAt.ToString("dd MMM yyyy, hh:mm tt")
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Last Updated</strong>
+                    <div class="mt-1">
+                        @if (Model.UpdatedAt.HasValue)
+                        {
+                            @Model.UpdatedAt.Value.ToString("dd MMM yyyy, hh:mm tt")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Not updated</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Due Date</strong>
+                    <div class="mt-1">
+                        @if (Model.DueDate.HasValue)
+                        {
+                            @if (!Model.Completed && Model.DueDate.Value < DateTime.Now)
+                            {
+                                <span class="text-danger fw-bold">
+                                    @Model.DueDate.Value.ToString("dd MMM yyyy")
+                                    <span class="badge bg-danger ms-1">Overdue</span>
+                                </span>
+                            }
+                            else
+                            {
+                                @Model.DueDate.Value.ToString("dd MMM yyyy")
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-muted">No due date</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Completion</strong>
+                    <div class="mt-1">
+                        @if (Model.Completed)
+                        {
+                            <span class="text-success">
+                                ✓ Completed
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">
+                                Not completed
+                            </span>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer bg-white">
+
+            <a asp-controller="User"
+               asp-action="Tasks"
+               class="btn btn-secondary">
+                Back to Tasks
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

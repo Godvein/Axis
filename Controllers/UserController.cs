@@ -7,15 +7,30 @@ namespace Axis.Controllers
     public class UserController : Controller
     {
         private readonly IUserDashboardService _userDashboardService;
-        public UserController(IUserDashboardService userDashboardService)
+        private readonly ITaskService _taskService;
+        public UserController(IUserDashboardService userDashboardService, ITaskService taskService)
         {
             _userDashboardService = userDashboardService;
+            _taskService = taskService;
         }
         public IActionResult Dashboard()
         {
             int userId = HttpContext.Session.GetInt32("UserId") ?? 0;
             UserDashboardViewModel model = _userDashboardService.getInfo(userId);
             return View(model);
+        }
+
+        public IActionResult TaskDetails([FromRoute] int id)
+        {
+            TaskDetailsViewModel? model = _taskService.GetTaskDetails(id);
+            if (model != null && model.AssignedTo == HttpContext.Session.GetString("Username"))
+            {
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "Authentication");
+            }
         }
     }
 }
