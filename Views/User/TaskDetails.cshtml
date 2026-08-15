@@ -253,6 +253,7 @@
             {
                 <form asp-controller="User"
                       asp-action="MarkTaskCompleted"
+                      asp-route-id="@Model.TaskId"
                       method="post">
 
                     <input type="hidden"

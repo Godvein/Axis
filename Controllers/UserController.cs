@@ -23,7 +23,7 @@ namespace Axis.Controllers
         public IActionResult TaskDetails([FromRoute] int id)
         {
             TaskDetailsViewModel? model = _taskService.GetTaskDetails(id);
-            if (model != null && model.AssignedTo == HttpContext.Session.GetString("Username"))
+            if (model != null && model.AssignedTo == HttpContext.Session.GetInt32("UserId"))
             {
                 return View(model);
             }
