@@ -2,6 +2,7 @@
 using Axis.Models.ViewModels;
 using Axis.Services;
 using Microsoft.AspNetCore.Mvc;
+using Axis.Models;
 
 namespace Axis.Controllers
 {
@@ -110,7 +111,6 @@ namespace Axis.Controllers
             _taskService.DeleteTask(id);
             return RedirectToAction("Tasks", "Admin");
         }
-        #endregion
         public IActionResult EditTask([FromRoute] int id)
         {
             EditTaskViewModel? editTaskViewModel = _taskService.GetTaskViewModel(id);
@@ -141,6 +141,23 @@ namespace Axis.Controllers
                 return NotFound();
             }
             return View(taskDetailsViewModel);
+        }
+        #endregion
+
+        public IActionResult Roles()
+        {
+            List<Role> roles = _roleService.GetRoles();  
+            List<RoleViewModel> rolesViewModel = new List<RoleViewModel>();
+
+            foreach(var role in roles)
+            {
+                rolesViewModel.Add(new RoleViewModel
+                {
+                    RoleId = role.RoleId,
+                    RoleName = role.RoleName
+                });
+            }
+            return View(rolesViewModel);
         }
     }
 }
