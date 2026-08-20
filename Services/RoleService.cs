@@ -1,5 +1,6 @@
 ﻿using Axis.Models;
 using Axis.Repositories;
+using Axis.Models.ViewModels;
 
 namespace Axis.Services
 {
@@ -16,5 +17,9 @@ namespace Axis.Services
         {
             return _roleRepository.GetRoles();
         }
+        public void AddRole(RoleViewModel role)
+        {
+            _roleRepository.AddRole(role);
+        }   
     }
 }

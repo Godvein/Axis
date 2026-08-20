@@ -159,5 +159,22 @@ namespace Axis.Controllers
             }
             return View(rolesViewModel);
         }
+        #region Role Management
+        public IActionResult CreateRole() {
+            RoleViewModel roleViewModel = new RoleViewModel();
+            return View(roleViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult CreateRole(RoleViewModel roleViewModel)
+        {
+            if (roleViewModel != null)
+            {
+                _roleService.AddRole(roleViewModel);
+                return RedirectToAction("Roles", "Admin");
+            }
+            return RedirectToAction("Error", "Home");
+        }
+        #endregion
     }
 }

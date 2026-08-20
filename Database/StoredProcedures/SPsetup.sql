@@ -227,11 +227,21 @@ BEGIN
 END
 go
 
+-- Mark Task Completed SP
 create proc usp_MarkTaskCompleted
 @id int
 
 as
 begin
 update Tasks set Completed = 1 where TaskId = @id
+end
+go
+
+-- Create Role SP
+create proc usp_CreateRole
+@RoleName varchar(50)
+as 
+begin
+insert into Roles (RoleName) values(@RoleName)
 end
 go

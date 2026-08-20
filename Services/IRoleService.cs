@@ -1,8 +1,10 @@
 ﻿using Axis.Models;
+using Axis.Models.ViewModels;
 namespace Axis.Services
 {
     public interface IRoleService
     {
         public List<Role> GetRoles();
+        public void AddRole(RoleViewModel role);
     }
 }

@@ -2,6 +2,7 @@
 using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Axis.Models.ViewModels;
 
 namespace Axis.Repositories
 {
@@ -21,6 +22,14 @@ namespace Axis.Repositories
             var roles = connection.Query<Role>("usp_GetRoles", commandType: CommandType.StoredProcedure).ToList();
             connection.Close();
             return roles;
-        }   
+        }
+
+        public void AddRole(RoleViewModel role)
+        {
+            using var connection = new SqlConnection(this.connectionString);
+            connection.Open();
+            connection.Execute("usp_CreateRole", new { RoleName = role.RoleName }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
     }
 }
