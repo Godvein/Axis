@@ -196,6 +196,12 @@ namespace Axis.Controllers
             }
             return RedirectToAction("Error", "Home");
         }
+
+        public IActionResult DeleteRole([FromRoute] int id)
+        {
+            _roleService.DeleteRole(id);
+            return RedirectToAction("Roles", "Admin");
+        }
         #endregion
     }
 }

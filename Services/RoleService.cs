@@ -29,5 +29,10 @@ namespace Axis.Services
         {
             _roleRepository.UpdateRole(role);
         }
+
+        public void DeleteRole(int id)
+        {
+            _roleRepository.DeleteRole(id);
+        }
     }
 }
