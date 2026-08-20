@@ -175,6 +175,27 @@ namespace Axis.Controllers
             }
             return RedirectToAction("Error", "Home");
         }
+
+        public IActionResult EditRole([FromRoute] int id)
+        {
+            RoleViewModel? roleViewModel = _roleService.GetRoleById(id);
+            if (roleViewModel == null)
+            {
+                return NotFound();
+            }
+            return View(roleViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditRole(RoleViewModel roleViewModel)
+        {
+            if (roleViewModel != null)
+            {
+                _roleService.UpdateRole(roleViewModel);
+                return RedirectToAction("Roles", "Admin");
+            }
+            return RedirectToAction("Error", "Home");
+        }
         #endregion
     }
 }

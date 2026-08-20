@@ -20,6 +20,14 @@ namespace Axis.Services
         public void AddRole(RoleViewModel role)
         {
             _roleRepository.AddRole(role);
-        }   
+        }  
+        public RoleViewModel? GetRoleById(int id) {
+            return _roleRepository.GetRoleById(id);
+        }
+
+        public void UpdateRole(RoleViewModel role)
+        {
+            _roleRepository.UpdateRole(role);
+        }
     }
 }

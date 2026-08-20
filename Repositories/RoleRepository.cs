@@ -19,7 +19,7 @@ namespace Axis.Repositories
         {
             using var connection = new SqlConnection(connectionString);
             connection.Open();
-            var roles = connection.Query<Role>("usp_GetRoles", commandType: CommandType.StoredProcedure).ToList();
+            var roles = connection.Query<Role>("usp_GetRoles", new{ RoleId = 0, Flag = 0 }, commandType: CommandType.StoredProcedure).ToList();
             connection.Close();
             return roles;
         }
@@ -29,6 +29,23 @@ namespace Axis.Repositories
             using var connection = new SqlConnection(this.connectionString);
             connection.Open();
             connection.Execute("usp_CreateRole", new { RoleName = role.RoleName }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+        }
+
+        public RoleViewModel? GetRoleById(int id)
+        {
+            using var connection = new SqlConnection(this.connectionString);
+            connection.Open();
+            var role = connection.QueryFirstOrDefault<RoleViewModel>("usp_GetRoles", new { RoleId = id, Flag = 1 }, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return role;
+        }
+
+        public void UpdateRole(RoleViewModel role)
+        {
+            using var connection = new SqlConnection(this.connectionString);
+            connection.Open();
+            connection.Execute("usp_EditRole", new { RoleId = role.RoleId, RoleName = role.RoleName }, commandType: CommandType.StoredProcedure);
             connection.Close();
         }
     }

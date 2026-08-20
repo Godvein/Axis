@@ -133,11 +133,20 @@ go
 
 -- Get Roles SP
 create proc usp_GetRoles 
+@RoleId int,
+@Flag int
 as
 begin
 
 set nocount on
+if @Flag = 0
+begin
 select * from Roles
+end
+if @Flag = 1
+begin
+select * from Roles where RoleId = @RoleId
+end
 end
 go
 
@@ -243,5 +252,24 @@ create proc usp_CreateRole
 as 
 begin
 insert into Roles (RoleName) values(@RoleName)
+end
+go
+
+-- Delete Role SP
+create proc usp_DeleteRole
+@RoleId int
+as
+begin
+delete from Roles where RoleId = @RoleId
+end
+go
+
+-- Edit Role SP
+create proc usp_EditRole
+@RoleId int,
+@RoleName varchar(50)
+as
+begin
+update Roles set RoleName = @RoleName where RoleId = @RoleId
 end
 go

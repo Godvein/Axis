@@ -7,5 +7,7 @@ namespace Axis.Repositories
     {
         public List<Role> GetRoles();
         public void AddRole(RoleViewModel role);
+        public RoleViewModel? GetRoleById(int id);
+        public void UpdateRole(RoleViewModel role);
     }
 }
