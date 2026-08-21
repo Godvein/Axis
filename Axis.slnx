@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="../Axis.Models/Axis.Models.csproj" Id="cf01033b-1eaa-41f3-8d63-09f52a525381" />
-  <Project Path="../Axis.Repositories/Axis.Repositories.csproj" Id="0982b4f7-cc34-4290-bba6-4c2e96bf02b0" />
-  <Project Path="../Axis.Services/Axis.Services.csproj" Id="788bbea8-81d4-4ac2-b118-795f7f1c8f29" />
-  <Project Path="Axis.Web.csproj" />
+  <Project Path="Axis.Models/Axis.Models.csproj" />
+  <Project Path="Axis.Repositories/Axis.Repositories.csproj" />
+  <Project Path="Axis.Services/Axis.Services.csproj" />
+  <Project Path="Axis.Web/Axis.Web.csproj" />
 </Solution>

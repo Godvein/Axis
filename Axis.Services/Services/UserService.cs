@@ -1,0 +1,52 @@
+﻿using Axis.Models.ViewModels;
+using Axis.Repositories.Interfaces;
+using Axis.Services.Interfaces;
+
+namespace Axis.Services
+{
+    public class UserService : IUserService
+    {
+        private readonly IUserRepository _userRepository;
+        
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public void CreateUser(CreateUserViewModel createUserViewModel)
+        {
+            if (createUserViewModel.Password == createUserViewModel.ConfirmPassword)
+            {
+                _userRepository.CreateUser(
+                createUserViewModel.Username,
+                BCrypt.Net.BCrypt.HashPassword(createUserViewModel.Password),
+                createUserViewModel.FullName,
+                createUserViewModel.Email,
+                createUserViewModel.RoleId,
+                createUserViewModel.DepartmentId
+            );
+
+            }
+        }
+        
+        public List<UserListViewModel> GetUserList()
+        {
+            return _userRepository.GetUserList();
+        }
+
+        public void DeleteUser(int id)
+        {
+            _userRepository.DeleteUser(id);
+        }
+
+        public EditUserViewModel? GetUserById(int id)
+        {
+            return _userRepository.GetUserById(id);
+        }
+
+        public void EditUser(EditUserViewModel editUserViewModel)
+        {
+            _userRepository.EditUser(editUserViewModel);
+        }
+    }
+}
