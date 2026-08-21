@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="Axis.Models/Axis.Models.csproj" />
   <Project Path="Axis.Repositories/Axis.Repositories.csproj" />
   <Project Path="Axis.Services/Axis.Services.csproj" />
