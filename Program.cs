@@ -1,4 +1,6 @@
 using Axis.Repositories;
+using Axis.Repositories.Interfaces;
+using Axis.Services.Interfaces;
 using Axis.Services;
 
 namespace Axis

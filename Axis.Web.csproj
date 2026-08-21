@@ -16,4 +16,10 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Axis.Models\Axis.Models.csproj" />
+    <ProjectReference Include="..\Axis.Repositories\Axis.Repositories.csproj" />
+    <ProjectReference Include="..\Axis.Services\Axis.Services.csproj" />
+  </ItemGroup>
+
 </Project>

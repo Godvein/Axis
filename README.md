@@ -5,3 +5,28 @@ Axis is a task management system designed to help Teams organize, track, and man
 ## Features
 
 - Task Creation and Assignment: Easily create tasks and assign them to team members.
+
+Axis.sln
+│
+├── Axis.Web
+│   ├── Controllers
+│   ├── Views
+│   ├── wwwroot
+│   └── Program.cs
+│
+├── Axis.Services
+│   ├── Interfaces
+│   └── Implementations
+│
+├── Axis.Repositories
+│   ├── Interfaces
+│   └── Implementations
+│
+├── Axis.Models
+│   ├── Entities
+│   └── ViewModels
+│
+└── Axis.Common
+    ├── Constants
+    ├── Helpers
+    └── Extensions

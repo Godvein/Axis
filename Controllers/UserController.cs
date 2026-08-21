@@ -1,5 +1,5 @@
 ﻿using Axis.Models.ViewModels;
-using Axis.Services;
+using Axis.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Axis.Controllers
