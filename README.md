@@ -199,10 +199,49 @@ This improves:
 - Code organization
 
 ---
+# Run Axis Without Building using docker
 
+You can run Axis using the pre-built Docker images without installing the .**NET** **SDK**, **SQL** Server, or building the project locally.
 
+### Install Docker Desktop
 
-## Getting Started
+Download and install Docker Desktop from the official Docker website:
+
+[https://docs.docker.com/get-started/get-docker/](https://docs.docker.com/get-started/get-docker/)
+
+Make sure Docker Desktop is running before continuing.
+
+### Download docker-compose.yml
+
+Download the docker-compose.yml file from this repository and place it in an empty folder.
+
+You only need this file to run the pre-built application.
+
+### Start Axis
+
+Open a terminal in the folder containing docker-compose.yml and run:
+
+docker compose up
+
+Docker will automatically download the required images and start Axis
+
+### Open Axis
+
+Once the containers have started, open:
+
+[http://localhost:**8080**](http://localhost:8080) 
+
+### Default Login 
+- Username: Admin 
+- Password: admin123 
+
+### Stop Axis
+
+Press Ctrl + C, or run:
+
+docker compose down
+
+## Build Axis
 
 ### Prerequisites
 

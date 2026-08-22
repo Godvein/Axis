@@ -1,3 +1,9 @@
+CREATE DATABASE AxisDB;
+GO
+
+USE AxisDB;
+GO
+
 create table Roles (
 	RoleId int identity primary key,
 	RoleName varchar(50),

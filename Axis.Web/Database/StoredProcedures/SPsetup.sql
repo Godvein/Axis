@@ -6,7 +6,7 @@ as
 begin
 if exists (select 1 from Users where Username = @Username)
 begin 
-select UserId, Username, FullName, RoleId, IsActive 
+select UserId, Username, PasswordHash, FullName, RoleId, IsActive 
 from Users where Username = @Username  
 set @returnMsg = 'ok'
 end
@@ -204,15 +204,17 @@ go
 
 -- User DashboardInfo SP
 CREATE PROC usp_UserDashboardInfo
-    @UserId INT,
+   @UserId INT,
     @AssignedTasks INT OUT,
     @CompletedTasks INT OUT,
-    @PendingTasks INT OUT
+    @PendingTasks INT OUT,
+    @OverdueTasks INT OUT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-      SELECT 
+    -- Assign all variables in a single optimized pass over the data
+    SELECT 
         @AssignedTasks = COUNT(TaskId),
         @CompletedTasks = SUM(CASE WHEN Completed = 1 THEN 1 ELSE 0 END),
         @PendingTasks =  ISNULL(
@@ -227,9 +229,11 @@ BEGIN
     END),
     0
 )
+
     FROM Tasks
     WHERE AssignedTo = @UserId;
- select t.TaskId, t.Title, t.Priority, t.Status, t.DueDate, assigned.Username as AssignedTo,
+    
+    select t.TaskId, t.Title, t.Priority, t.Status, t.DueDate, assigned.Username as AssignedTo,
     created.Username as CreatedBy, t.Completed from Tasks t 
     left join Users assigned on assigned.UserId = t.AssignedTo
     left join Users created on created.UserId = t.CreatedBy where assigned.UserId = @UserId
