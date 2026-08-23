@@ -43,7 +43,7 @@ namespace Axis.Controllers
         [HttpPost]
         public IActionResult MarkTaskCompleted(int id)
         {
-            _taskService.MarkTaskCompleted(id);
+            _taskService.MarkTaskCompleted(id, HttpContext.Session.GetInt32("UserId") ?? 0);
             return RedirectToAction("Tasks");
         }
     }

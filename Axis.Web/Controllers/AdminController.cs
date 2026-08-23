@@ -51,7 +51,7 @@ namespace Axis.Controllers
         public IActionResult CreateUser(CreateUserViewModel createUserViewModel) { 
             if (createUserViewModel != null)
             {
-               _userService.CreateUser(createUserViewModel);
+                _userService.CreateUser(createUserViewModel, HttpContext.Session.GetInt32("UserId") ?? 0);
                 return RedirectToAction("Users", "Admin");
             }
             return RedirectToAction("CreateUser", "Admin");
@@ -76,7 +76,7 @@ namespace Axis.Controllers
         {
             if (editUserViewModel != null)
             {
-                _userService.EditUser(editUserViewModel);
+                _userService.EditUser(editUserViewModel, HttpContext.Session.GetInt32("UserId") ?? 0);
                 return RedirectToAction("Users", "Admin");
             }
             return RedirectToAction("Error", "Home");
@@ -84,7 +84,7 @@ namespace Axis.Controllers
         #endregion
         public IActionResult DeleteUser([FromRoute] int id)
         {
-            _userService.DeleteUser(id);
+            _userService.DeleteUser(id, HttpContext.Session.GetInt32("UserId") ?? 0);
             return RedirectToAction("Users", "Admin");
         }
         #endregion
@@ -114,7 +114,7 @@ namespace Axis.Controllers
 
         public IActionResult DeleteTask([FromRoute] int id)
         {
-            _taskService.DeleteTask(id);
+            _taskService.DeleteTask(id, HttpContext.Session.GetInt32("UserId") ?? 0);
             return RedirectToAction("Tasks", "Admin");
         }
         public IActionResult EditTask([FromRoute] int id)
@@ -176,7 +176,7 @@ namespace Axis.Controllers
         {
             if (roleViewModel != null)
             {
-                _roleService.AddRole(roleViewModel);
+                _roleService.AddRole(roleViewModel, HttpContext.Session.GetInt32("UserId") ?? 0);
                 return RedirectToAction("Roles", "Admin");
             }
             return RedirectToAction("Error", "Home");
@@ -197,7 +197,7 @@ namespace Axis.Controllers
         {
             if (roleViewModel != null)
             {
-                _roleService.UpdateRole(roleViewModel);
+                _roleService.UpdateRole(roleViewModel, HttpContext.Session.GetInt32("UserId") ?? 0);
                 return RedirectToAction("Roles", "Admin");
             }
             return RedirectToAction("Error", "Home");
@@ -205,7 +205,7 @@ namespace Axis.Controllers
 
         public IActionResult DeleteRole([FromRoute] int id)
         {
-            _roleService.DeleteRole(id);
+            _roleService.DeleteRole(id, HttpContext.Session.GetInt32("UserId") ?? 0);
             return RedirectToAction("Roles", "Admin");
         }
         #endregion

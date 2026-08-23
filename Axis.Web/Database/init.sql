@@ -198,7 +198,8 @@ end
 
 if @flag = 1
 begin
-select top 10 * from RecentActivities
+select top 10 r.ActivityId, r.Activity, u.Username, r.ActivityType, r.CreatedAt from RecentActivities r
+left join Users u on u.UserId = r.UserId
 end
 end
 go
@@ -349,6 +350,20 @@ begin
 update Roles set RoleName = @RoleName where RoleId = @RoleId
 end
 go
+
+-- Activities Log SP
+create proc usp_ActivityLog
+@Activity varchar(255),
+@UserId int,
+@ActivityType varchar(100)
+
+as
+begin
+insert into RecentActivities (Activity, UserId, ActivityType, CreatedAt)
+values (@Activity, @UserId, @ActivityType, GetDate())
+end
+go
+
 
 -- 001_seed.sql
 Insert into Roles values ('Admin'), ('Employee');

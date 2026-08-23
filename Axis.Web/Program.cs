@@ -2,6 +2,7 @@ using Axis.Repositories;
 using Axis.Repositories.Interfaces;
 using Axis.Services.Interfaces;
 using Axis.Services;
+using Axis.Repositories.Repositories;
 
 namespace Axis
 {
@@ -28,6 +29,8 @@ namespace Axis
             builder.Services.AddScoped<IUserDashboardService, UserDashboardService>();
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
             builder.Services.AddScoped<ITaskService, TaskService>();
+            
+            builder.Services.AddScoped<IUtilityRepository, UtilityRepository>();
 
             // session registration
             builder.Services.AddDistributedMemoryCache();

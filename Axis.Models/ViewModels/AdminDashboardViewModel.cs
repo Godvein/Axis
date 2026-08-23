@@ -12,7 +12,7 @@
     {
         public int ActivityId { get; set; }
         public string Activity { get; set; } = string.Empty;
-        public DateTime ActivityType { get; set; }
+        public string ActivityType { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
