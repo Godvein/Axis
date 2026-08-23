@@ -50,6 +50,16 @@ Create Table Tasks (
 
 go
 
+create table RecentActivities (
+ActivityId int identity primary key,
+UserId int,
+Activity varchar(255),
+ActivityType varchar(50),
+CreatedAt DateTime,
+foreign key (UserId) references Users(UserId)
+);
+go
+
 -- Stored Procedures
 -- User Login SP
 create proc usp_Login 
@@ -174,13 +184,22 @@ create proc usp_AdminDashboardInfo
 @UsersCount int out,
 @TasksCount int out,
 @RolesCount int out,
-@DepartmentsCount int out
+@DepartmentsCount int out,
+@flag int
 as
+begin
+if @flag = 0
 begin
 set @UsersCount = (select count(UserId) as UsersCount from Users)
 set @TasksCount = (select count(TaskId) as TasksCount from Tasks)
 set @RolesCount = (select count(RoleId) as RolesCount from Roles)
 set @DepartmentsCount = (select count(DepartmentId) as DepartmentsCount from Departments)
+end
+
+if @flag = 1
+begin
+select top 10 * from RecentActivities
+end
 end
 go
 

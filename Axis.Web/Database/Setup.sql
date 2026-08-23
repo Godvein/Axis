@@ -48,3 +48,13 @@ Create Table Tasks (
 	);
 
 go
+
+create table RecentActivities (
+ActivityId int identity primary key,
+UserId int,
+Activity varchar(255),
+ActivityType varchar(50),
+CreatedAt DateTime,
+foreign key (UserId) references Users(UserId)
+);
+go

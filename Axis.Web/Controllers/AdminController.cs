@@ -24,8 +24,14 @@ namespace Axis.Controllers
         }
         public IActionResult Dashboard()
         {
-            AdminDashboardViewModel adminDashboardInfo = _adminDashboardService.getInfo();
-            return View(adminDashboardInfo);
+            AdminDashboardViewModel adminDashboard = _adminDashboardService.getInfo();
+            RecentActivitiesViewModel? recentActivities = _adminDashboardService.getRecentActivities();
+            AdminDashboardInfoViewModel adminDashboardInfoViewModel = new AdminDashboardInfoViewModel
+            {
+                AdminDashboardInfo = adminDashboard,
+                RecentActivities = recentActivities
+            };
+            return View(adminDashboardInfoViewModel);
         }
 
         #region User Management

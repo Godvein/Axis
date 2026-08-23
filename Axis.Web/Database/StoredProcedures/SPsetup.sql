@@ -121,14 +121,24 @@ create proc usp_AdminDashboardInfo
 @UsersCount int out,
 @TasksCount int out,
 @RolesCount int out,
-@DepartmentsCount int out
+@DepartmentsCount int out,
+@flag int
 as
+begin
+if @flag = 0
 begin
 set @UsersCount = (select count(UserId) as UsersCount from Users)
 set @TasksCount = (select count(TaskId) as TasksCount from Tasks)
 set @RolesCount = (select count(RoleId) as RolesCount from Roles)
 set @DepartmentsCount = (select count(DepartmentId) as DepartmentsCount from Departments)
 end
+
+if @flag = 1
+begin
+select top 10 * from RecentActivities
+end
+end
+
 go
 
 -- Get Roles SP

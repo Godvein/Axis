@@ -22,11 +22,11 @@ namespace Axis.Repositories
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             var parameters = new DynamicParameters();
-            parameters.Add("@UsersCount", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-            parameters.Add("@TasksCount", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-            parameters.Add("@RolesCount", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-            parameters.Add("@DepartmentsCount", dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-            
+            parameters.Add("@UsersCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@TasksCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@RolesCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@DepartmentsCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@flag", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
             connection.Execute("usp_AdminDashboardInfo", parameters, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -37,6 +37,22 @@ namespace Axis.Repositories
                 RolesCount = parameters.Get<int>("@RolesCount"),
                 DepartmentsCount = parameters.Get<int>("@DepartmentsCount")
             };
+        }
+
+        public RecentActivitiesViewModel? getRecentActivities()
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var parameters = new DynamicParameters();
+            parameters.Add("@UsersCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@TasksCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@RolesCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@DepartmentsCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            parameters.Add("@flag", 1, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            RecentActivitiesViewModel? recentActivitiesViewModel = connection.QueryFirstOrDefault<RecentActivitiesViewModel>(
+                "usp_AdminDashboardInfo", parameters, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return recentActivitiesViewModel;
         }
         #endregion
     }
