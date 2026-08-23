@@ -17,7 +17,7 @@ namespace Axis.Services
             return _repository.getInfo();
         }
 
-        public RecentActivitiesViewModel? getRecentActivities()
+        public List<RecentActivitiesViewModel>? getRecentActivities()
         {
             return _repository.getRecentActivities();
         }

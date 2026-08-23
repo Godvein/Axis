@@ -39,7 +39,7 @@ namespace Axis.Repositories
             };
         }
 
-        public RecentActivitiesViewModel? getRecentActivities()
+        public List<RecentActivitiesViewModel>? getRecentActivities()
         {
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
@@ -49,8 +49,8 @@ namespace Axis.Repositories
             parameters.Add("@RolesCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
             parameters.Add("@DepartmentsCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
             parameters.Add("@flag", 1, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            RecentActivitiesViewModel? recentActivitiesViewModel = connection.QueryFirstOrDefault<RecentActivitiesViewModel>(
-                "usp_AdminDashboardInfo", parameters, commandType: CommandType.StoredProcedure);
+            List<RecentActivitiesViewModel>? recentActivitiesViewModel = connection.Query<RecentActivitiesViewModel>(
+                "usp_AdminDashboardInfo", parameters, commandType: CommandType.StoredProcedure).ToList();
             connection.Close();
             return recentActivitiesViewModel;
         }

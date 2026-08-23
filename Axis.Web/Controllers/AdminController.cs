@@ -25,7 +25,7 @@ namespace Axis.Controllers
         public IActionResult Dashboard()
         {
             AdminDashboardViewModel adminDashboard = _adminDashboardService.getInfo();
-            RecentActivitiesViewModel? recentActivities = _adminDashboardService.getRecentActivities();
+            List<RecentActivitiesViewModel>? recentActivities = _adminDashboardService.getRecentActivities();
             AdminDashboardInfoViewModel adminDashboardInfoViewModel = new AdminDashboardInfoViewModel
             {
                 AdminDashboardInfo = adminDashboard,

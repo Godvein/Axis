@@ -24,7 +24,7 @@ namespace Axis.Services
         {
             _roleRepository.AddRole(role);
             _utilityRepository.LogActivity(
-               role.RoleName + "Role added", UserId: userId, ActivityType: "Role");
+               role.RoleName + " Role added", UserId: userId, ActivityType: "Role");
         }  
         public RoleViewModel? GetRoleById(int id) {
             return _roleRepository.GetRoleById(id);
@@ -34,7 +34,7 @@ namespace Axis.Services
         {
             _roleRepository.UpdateRole(role);
             _utilityRepository.LogActivity(
-               role.RoleName + "Role updated", UserId: userId, ActivityType: "Role");
+               role.RoleName + " Role updated", UserId: userId, ActivityType: "Role");
         }
 
         public void DeleteRole(int id, int userId)
@@ -42,7 +42,7 @@ namespace Axis.Services
             _roleRepository.DeleteRole(id);
             RoleViewModel? role = _roleRepository.GetRoleById(id);
             _utilityRepository.LogActivity(
-                role?.RoleName + "Role deleted", UserId: userId, ActivityType: "Role");
+                role?.RoleName + " Role deleted", UserId: userId, ActivityType: "Role");
         }
     }
 }

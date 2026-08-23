@@ -4,6 +4,6 @@ namespace Axis.Services.Interfaces
     public interface IAdminDashboardService
     {
         public AdminDashboardViewModel getInfo();
-        public RecentActivitiesViewModel? getRecentActivities();
+        public List<RecentActivitiesViewModel>? getRecentActivities();
     }
 }

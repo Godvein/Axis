@@ -5,6 +5,6 @@ namespace Axis.Repositories.Interfaces
     public interface IAdminDashboardRepository
     {
         public AdminDashboardViewModel getInfo();
-        public RecentActivitiesViewModel? getRecentActivities();
+        public List<RecentActivitiesViewModel>? getRecentActivities();
     }
 }

@@ -21,6 +21,6 @@
     public class AdminDashboardInfoViewModel
     {
         public AdminDashboardViewModel AdminDashboardInfo { get; set; } = new AdminDashboardViewModel();
-        public RecentActivitiesViewModel? RecentActivities { get; set; }
+        public List<RecentActivitiesViewModel>? RecentActivities { get; set; }
     }
 }

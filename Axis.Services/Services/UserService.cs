@@ -28,7 +28,7 @@ namespace Axis.Services
                 createUserViewModel.DepartmentId
             );
             _utilityRepository.LogActivity(
-                createUserViewModel.Username + "User created", UserId: userId, ActivityType: "User");
+                createUserViewModel.Username + " User created", UserId: userId, ActivityType: "User");
 
             }
         }
@@ -41,8 +41,9 @@ namespace Axis.Services
         public void DeleteUser(int id, int userId)
         {
             _userRepository.DeleteUser(id);
+            EditUserViewModel? editUserViewModel = _userRepository.GetUserById(id);
             _utilityRepository.LogActivity(
-                "User deleted", UserId: userId, ActivityType: "User");
+                editUserViewModel?.Username + " User deleted", UserId: userId, ActivityType: "User");
         }
 
         public EditUserViewModel? GetUserById(int id)
@@ -54,7 +55,7 @@ namespace Axis.Services
         {
             _userRepository.EditUser(editUserViewModel);
             _utilityRepository.LogActivity(
-               editUserViewModel.Username + "User updated", UserId: userId, ActivityType: "User");
+               editUserViewModel.Username + " User updated", UserId: userId, ActivityType: "User");
         }
     }
 }

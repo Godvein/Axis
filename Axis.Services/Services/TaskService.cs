@@ -25,7 +25,7 @@ namespace Axis.Services
             }
             _taskRepository.AddTask(createTaskViewModel, id);
             _utilityRepository.LogActivity(
-                createTaskViewModel.Title + "Task added", UserId: id, ActivityType: "Task");
+                createTaskViewModel.Title + " Task added", UserId: id, ActivityType: "Task");
         }
         public List<TaskListViewModel> GetTaskList()
         {
@@ -37,7 +37,7 @@ namespace Axis.Services
             _taskRepository.DeleteTask(id);
             TaskDetailsViewModel? task = _taskRepository.GetTaskDetails(id);
             _utilityRepository.LogActivity(
-                task?.Title + "Task deleted", UserId: userId, ActivityType: "Task");
+                task?.Title + " Task deleted", UserId: userId, ActivityType: "Task");
         }
         public EditTaskViewModel? GetTaskViewModel(int id)
         {
@@ -48,7 +48,7 @@ namespace Axis.Services
             _taskRepository.UpdateTask(editTaskViewModel, id);
             TaskDetailsViewModel? task = _taskRepository.GetTaskDetails(id);
             _utilityRepository.LogActivity(
-                task?.Title + "Task updated", UserId: id, ActivityType: "Task");
+                task?.Title + " Task updated", UserId: id, ActivityType: "Task");
         }
         public TaskDetailsViewModel? GetTaskDetails(int id)
         {
@@ -59,7 +59,7 @@ namespace Axis.Services
             _taskRepository.MarkTaskCompleted(id);
             TaskDetailsViewModel? task = _taskRepository.GetTaskDetails(id);
             _utilityRepository.LogActivity(
-                task?.Title + "Task marked as completed", UserId: userId, ActivityType: "Task");
+                task?.Title + " Task marked as completed", UserId: userId, ActivityType: "Task");
         }   
     }
 }
