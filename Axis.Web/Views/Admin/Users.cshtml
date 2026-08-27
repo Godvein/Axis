@@ -1,4 +1,4 @@
-﻿@model List<Axis.Models.ViewModels.UserListViewModel>
+﻿@model Axis.Models.ViewModels.UserManagementViewModel
 
 @{
     ViewData["Title"] = "Manage Users";
@@ -6,10 +6,14 @@
 
 <div class="container mt-4">
 
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
+
         <div>
             <h2>Manage Users</h2>
-            <p class="text-muted mb-0">View, create and manage system users.</p>
+            <p class="text-muted mb-0">
+                View, create and manage system users.
+            </p>
         </div>
 
         <a asp-controller="Admin"
@@ -17,39 +21,144 @@
            class="btn btn-primary">
             + Add User
         </a>
+
     </div>
 
-    <div class="card shadow-sm">
+
+    <!-- Search & Filters -->
+    <div class="card shadow-sm mb-4">
 
         <div class="card-header">
-            <div class="row">
-
-                <div class="col-md-6">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Search by username or full name..." />
-                </div>
-
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>All Roles</option>
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>All Status</option>
-                    </select>
-                </div>
-
-            </div>
+            <h5 class="mb-0">Search & Filters</h5>
         </div>
+
+        <div class="card-body">
+
+            <form asp-controller="Admin"
+                  asp-action="UsersSearch"
+                  method="get">
+
+                <div class="row g-3">
+
+                    <!-- Search -->
+                    <div class="col-md-5">
+
+                        <label class="form-label">
+                            Search
+                        </label>
+                        <input type="text"
+                               name="Username"
+                               class="form-control"
+                               placeholder="Search by username"
+                               value="@Context.Request.Query["Username"]" />
+
+                    </div>
+
+
+                    <!-- Role -->
+                    <div class="col-md-3">
+
+                        <label class="form-label">
+                            Role
+                        </label>
+
+                        <select name="roleId"
+                                class="form-select">
+
+                            <option value="">
+                                All Roles
+                            </option>
+
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option value="@role.RoleId">
+                                    @role.RoleName
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Department -->
+                    <div class="col-md-2">
+
+                        <label class="form-label">
+                            Department
+                        </label>
+
+                        <select name="departmentId"
+                                class="form-select">
+
+                            <option value="">
+                                All Departments
+                            </option>
+
+                            @foreach (var department in Model.Departments)
+                            {
+                                <option value="@department.DepartmentId">
+                                    @department.DepartmentName
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+                    <!-- Status -->
+                    <div class="col-md-2">
+
+                        <label class="form-label">
+                            Status
+                        </label>
+
+                        <select name="IsActive"
+                                class="form-select">
+
+                            <option value="">
+                                -- Select Status --
+                            </option>
+
+                                <option value="1">
+                                    Active
+                                </option>
+
+                                <option value="0">
+                                    Inactive
+                                </option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Search Button -->
+                    <div class="col-md-2 d-flex align-items-end">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Search
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Users Table -->
+    <div class="card shadow-sm">
 
         <div class="card-body p-0">
 
             <table class="table table-hover mb-0">
 
                 <thead class="table-light">
+
                     <tr>
                         <th>ID</th>
                         <th>Username</th>
@@ -59,33 +168,56 @@
                         <th>Status</th>
                         <th width="220">Actions</th>
                     </tr>
+
                 </thead>
 
                 <tbody>
 
-                    @if (Model.Any())
+                    @if (Model.Users.Any())
                     {
-                        @foreach (var user in Model)
+                        @foreach (var user in Model.Users)
                         {
                             <tr>
-                                <td>@user.UserId</td>
-                                <td>@user.Username</td>
-                                <td>@user.FullName</td>
-                                <td>@user.RoleName</td>
-								<td>@user.DepartmentName</td>
 
                                 <td>
-                                    @if (user.IsActive)
-                                    {
-                                        <span class="badge bg-success">Active</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary">Inactive</span>
-                                    }
+                                    @user.UserId
                                 </td>
 
                                 <td>
+                                    @user.Username
+                                </td>
+
+                                <td>
+                                    @user.FullName
+                                </td>
+
+                                <td>
+                                    @user.RoleName
+                                </td>
+
+                                <td>
+                                    @user.DepartmentName
+                                </td>
+
+                                <td>
+
+                                    @if (user.IsActive)
+                                    {
+                                        <span class="badge bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            Inactive
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
                                     <a asp-action="EditUser"
                                        asp-route-id="@user.UserId"
                                        class="btn btn-sm btn-warning">
@@ -97,23 +229,32 @@
                                        class="btn btn-sm btn-info text-white">
                                         Details
                                     </a>
-                                @if (user.UserId != Context.Session.GetInt32("UserId")){
-                                    <a asp-action="DeleteUser"
-                                       asp-route-id="@user.UserId"
-                                       class="btn btn-sm btn-danger">
-                                        Delete
-                                    </a>
-                                }
+
+                                    @if (user.UserId != Context.Session.GetInt32("UserId"))
+                                    {
+                                        <a asp-action="DeleteUser"
+                                           asp-route-id="@user.UserId"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+
                                 </td>
+
                             </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="6" class="text-center p-4">
+
+                            <td colspan="7"
+                                class="text-center p-4 text-muted">
+
                                 No users found.
+
                             </td>
+
                         </tr>
                     }
 

@@ -2,6 +2,12 @@
 
 namespace Axis.Models.ViewModels
 {
+    public class UserManagementViewModel
+    {
+        public List<UserListViewModel> Users { get; set; } = new List<UserListViewModel>();
+        public List<Role> Roles { get; set; } = new List<Role>();
+        public List<Department> Departments { get; set; } = new List<Department>();
+    } 
     public class UserListViewModel
     {
         public int UserId { get; set; }
@@ -10,6 +16,7 @@ namespace Axis.Models.ViewModels
         public string RoleName { get; set; } = string.Empty;
         public string DepartmentName { get; set; } = string.Empty;
         public bool IsActive { get; set; }
+        public List<RoleViewModel> RoleViewModel { get; set; } = new List<RoleViewModel>();
 
     }
     public class CreateUserViewModel

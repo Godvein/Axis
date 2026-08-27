@@ -20,7 +20,11 @@ go
 -- Get User SP
 create proc usp_GetUsers
 @UserId int,
-@flag int
+@flag int,
+@Username varchar(100),
+@DepartmentId int,
+@RoleId int,
+@IsActive bit
 as
 begin
 if @flag = 0
@@ -32,6 +36,24 @@ if @flag = 1
 begin
 select u.UserId, u.Username, u.FullName, r.RoleName, d.DepartmentName, u.IsActive from Users u
 left join Roles r on u.RoleId = r.RoleId left join Departments d on u.DepartmentId = d.DepartmentId
+end
+
+if @flag = 2
+begin
+select u.UserId, u.Username, u.FullName, r.RoleName, d.DepartmentName, u.IsActive from Users u
+left join Roles r on u.RoleId = r.RoleId left join Departments d on u.DepartmentId = d.DepartmentId
+WHERE
+    (@Username IS NULL OR @Username = '' 
+        OR u.Username LIKE '%' + @Username + '%')
+
+AND (@DepartmentId IS NULL 
+        OR u.DepartmentId = @DepartmentId)
+
+AND (@RoleId IS NULL 
+        OR u.RoleId = @RoleId)
+
+AND (@IsActive IS NULL 
+        OR u.IsActive = @IsActive)
 end
 end
 

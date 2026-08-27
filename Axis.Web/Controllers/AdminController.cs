@@ -38,7 +38,28 @@ namespace Axis.Controllers
         public IActionResult Users()
         {
             List<UserListViewModel> users = _userService.GetUserList();
-            return View(users);
+            List<Role> roles = _roleService.GetRoles();
+            List<Department> departments = _departmentService.GetDepartments();
+            UserManagementViewModel userManagementViewModel = new UserManagementViewModel
+            {
+                Users = users,
+                Roles = roles,
+                Departments = departments
+            };
+            return View(userManagementViewModel);
+        }
+        public IActionResult UsersSearch([FromQuery] string Username, [FromQuery] int? roleId, [FromQuery] int? departmentId, [FromQuery] int? IsActive)
+        {
+            List<UserListViewModel> users = _userService.SearchUsers(Username, roleId, departmentId, IsActive);
+            List<Role> roles = _roleService.GetRoles();
+            List<Department> departments = _departmentService.GetDepartments();
+            UserManagementViewModel userManagementViewModel = new UserManagementViewModel
+            {
+                Users = users,
+                Roles = roles,
+                Departments = departments
+            };
+            return View("Users", userManagementViewModel);
         }
         #region create user controller
         public IActionResult CreateUser() {

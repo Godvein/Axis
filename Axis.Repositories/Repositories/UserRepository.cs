@@ -35,7 +35,18 @@ namespace Axis.Repositories
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             var users = connection.Query<UserListViewModel>("usp_GetUsers", 
-                new { flag = 1, UserId = 0 }, commandType: CommandType.StoredProcedure).ToList();
+                new { flag = 1, UserId = 0, Username = "", RoleId = 0, DepartmentId = 0, IsActive = false }, commandType: CommandType.StoredProcedure).ToList();
+            connection.Close();
+            return users;
+        }
+
+        public List<UserListViewModel> SearchUsers(string Username, int? roleId, int? departmentId, int? IsActive)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            var users = connection.Query<UserListViewModel>("usp_GetUsers",
+                new { flag = 2, UserId = 0, Username = Username, RoleId = roleId, DepartmentId = departmentId, IsActive = IsActive },
+                commandType: CommandType.StoredProcedure).ToList();
             connection.Close();
             return users;
         }
@@ -56,7 +67,7 @@ namespace Axis.Repositories
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             var user = connection.QueryFirstOrDefault<EditUserViewModel>("usp_GetUsers",
-                new { flag = 0, UserId = id }, commandType: CommandType.StoredProcedure);
+                new { flag = 0, UserId = id, Username = "", RoleId = 0, DepartmentId = 0, IsActive = false }, commandType: CommandType.StoredProcedure);
             if(user != null)
                 user.UserId = id;
             connection.Close();

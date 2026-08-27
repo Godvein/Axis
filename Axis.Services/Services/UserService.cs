@@ -38,6 +38,11 @@ namespace Axis.Services
             return _userRepository.GetUserList();
         }
 
+        public List<UserListViewModel> SearchUsers(string Username, int? roleId, int? departmentId, int? IsActive)
+        {
+            return _userRepository.SearchUsers(Username, roleId, departmentId, IsActive);
+        }
+
         public void DeleteUser(int id, int userId)
         {
             _userRepository.DeleteUser(id);
