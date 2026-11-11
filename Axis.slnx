@@ -3,6 +3,10 @@
     <File Path=".gitignore" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="Axis.Api.Application/Axis.Api.Application.csproj" Id="2ae92cad-34cc-40ec-aec7-88cd0f8a8c5e" />
+  <Project Path="Axis.Api.Core/Axis.Api.Core.csproj" Id="551fee13-5bc5-43bd-8744-3756d44d3649" />
+  <Project Path="Axis.Api.Infrastructure/Axis.Api.Infrastructure.csproj" Id="46164be7-5807-4cd1-9676-91016bc40c8c" />
+  <Project Path="Axis.Api/Axis.Api.csproj" Id="c0194643-b775-4937-8ceb-1fe7f9672695" />
   <Project Path="Axis.Models/Axis.Models.csproj" />
   <Project Path="Axis.Repositories/Axis.Repositories.csproj" />
   <Project Path="Axis.Services/Axis.Services.csproj" />

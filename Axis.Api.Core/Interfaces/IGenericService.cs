@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Axis.Api.Core.Interfaces
+{
+    public interface IGenericService<T>
+    {
+        public Task<List<T>> GetAllObjects();
+    }
+}
