@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Axis.Api.Core.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
         public int UserId { get; set; }
         public string Username { get; set; }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Axis.Api.Infrastructure.Data;
 using Axis.Api.Core.Entities;
 using Axis.Api.Core.Interfaces;
+using Axis.Api.Events;
 namespace Axis.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -18,6 +19,7 @@ namespace Axis.Api.Controllers
             _genericService = genericService;
         }
 
+        
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
@@ -25,5 +27,11 @@ namespace Axis.Api.Controllers
             return Ok(users);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> CreateUser(User user)
+        {
+            await _genericService.SaveObject(user);
+            return Ok();
+        }
     }
 }

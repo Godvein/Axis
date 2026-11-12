@@ -7,5 +7,6 @@ namespace Axis.Api.Core.Interfaces
     public interface IGenericService<T>
     {
         public Task<List<T>> GetAllObjects();
+        public Task SaveObject(T entity);
     }
 }
